@@ -14,6 +14,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// To allow Jade mixins to work
+// Creates a string equivalent to current directory + views - essentialy the same as `./views`
+app.locals.basedir = path.join(__dirname, 'views');
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
