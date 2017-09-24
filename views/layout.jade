@@ -10,8 +10,15 @@ html
     script(src="/bower_components/handlebars/handlebars.js")
     script(src="/bower_components/backbone/backbone.js")
   body
-    h1 Express
-    p Hello world
+    header.main-header
+    main
+      header.board-header
+      section.board-content
+      
+      block content
     
-    
-    block content
+    +javascript_include_tag("application")
+    +javascript_include_tag("templatesCompiled")
+    +javascript_include_tag("views/header")
+    script.
+      App.init()

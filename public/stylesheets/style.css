@@ -1,6 +1,15 @@
+@import url('whitespace-reset.css');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(0, 121, 191);
+  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  margin: 0
+}
+
 }
 
 a {
