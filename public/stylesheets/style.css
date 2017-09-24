@@ -10,8 +10,72 @@ body {
   margin: 0
 }
 
+/* Header */
+
+.main-header {
+  background: #026AA7;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  color: white;
+  justify-content: space-between;
+  padding: 5px 8px;
 }
 
-a {
-  color: #00B7FF;
+.left-group,
+.right-group {
+  display:flex;
+}
+
+.header-button {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, .3);
+  border-radius: 3px;
+  justify-content: center;
+}
+
+.header-button + .header-button { margin-left: 8px; }
+
+.header-md {
+  width: 30px;
+}
+
+.user-badge {
+  border-radius: 100%;
+  background: #f3f3f3;
+  color: black;
+}
+
+.search-input {
+  width: 180px;
+  background-color: inherit;
+  height: 100%;
+  border: none;
+  padding-left: 5px;
+}
+
+.search-input:focus {
+  width: 300px;
+  transition: width 300ms ease;
+  outline: none;
+}
+
+.icon-magnifier {
+
+}
+
+.logo {
+  height: 30px;
+  width: 80px;
+  position: relative;
+  top: 5px;
+}
+
+.logo-icon {
+  display: block;
+  background: url('https://a.trellocdn.com/images/01ef898811a879595cea8ac3cd77a155/header-logo-2x.png') no-repeat;
+  background-size: 80px 30px;
+  width: 100%;
+  height: 100%;
 }
