@@ -100,5 +100,15 @@ body {
 
 .add-card {
   color: #838c91;
-  padding-top: 8px;
+}
+
+/* Cards */
+
+.card {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 3px;
 }

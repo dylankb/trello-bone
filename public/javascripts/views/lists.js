@@ -5,6 +5,7 @@ var ListsView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.renderAdditionalList);
   },
   render: function() {
+    this.$el.empty();
     this.collection.each(this.renderAdditionalList, this);
   },
   renderAdditionalList: function(list) {
