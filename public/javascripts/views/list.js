@@ -5,6 +5,16 @@ var ListView = Backbone.View.extend({
   initialize: function() {
     this.render();
   },
+  events: {
+    'click .add-card': 'displayNewCardModal',
+  },
+  displayNewCardModal: function(e) {
+    e.preventDefault();
+    $(e.currentTarget).hide();
+
+    this.NewCardModal = new NewCardModal();
+    this.$el.append(this.NewCardModal.el);
+  },
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     this.CardsView = new CardsView({

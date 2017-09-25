@@ -112,3 +112,12 @@ body {
   padding: 8px;
   border-radius: 3px;
 }
+
+/* New Card Modal */
+
+.new-card-textarea {
+  resize: none;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+}

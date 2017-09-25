@@ -27,8 +27,9 @@ html
     +javascript_include_tag("collections/cards")
     +javascript_include_tag("views/list")
     +javascript_include_tag("views/lists")
-    +javascript_include_tag("views/card")
-    +javascript_include_tag("views/cards")
+    +javascript_include_tag("views/cards/card")
+    +javascript_include_tag("views/cards/cards")
+    +javascript_include_tag("views/cards/new")
     script(type="text/javascript").
       App.Lists = new ListsCollection(!{ JSON.stringify(listsCollection) });
       var cardsData = !{ JSON.stringify(cardsCollection) };
