@@ -21,5 +21,16 @@ html
     +javascript_include_tag("application")
     +javascript_include_tag("templatesCompiled")
     +javascript_include_tag("views/header")
-    script.
-      App.init()
+    +javascript_include_tag("models/list")
+    +javascript_include_tag("models/card")
+    +javascript_include_tag("collections/lists")
+    +javascript_include_tag("collections/cards")
+    +javascript_include_tag("views/list")
+    +javascript_include_tag("views/lists")
+    script(type="text/javascript").
+      App.Lists = new ListsCollection(!{ JSON.stringify(listsCollection) });
+      var cardsData = !{ JSON.stringify(cardsCollection) };
+      App.Lists.models.forEach(function(list) {
+        list.Cards = new CardsCollection(cardsData[list.get('id')]);
+      });
+      App.init();
