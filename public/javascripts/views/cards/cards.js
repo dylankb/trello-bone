@@ -1,6 +1,6 @@
 var CardsView = Backbone.View.extend({
   initialize: function() {
-    this.render();
+    if (this.collection.models.length) { this.render(); }
     this.listenTo(this.collection, 'add', this.renderAdditionalCard);
   },
   render: function() {

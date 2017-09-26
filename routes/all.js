@@ -11,18 +11,34 @@ var Cards = require(path.resolve(path.dirname(__dirname), 'modules/cards'));
 router.get('/', index.route);
 
 router.route('/lists/:id/cards')
-  .post(function postRequest(req, res) {
+  .post(function postRequestNewCard(req, res) {
     var currentList = _(Lists.get()).findWhere({ id: Number(req.params.id) });
     var cardsData = Cards.get();
     var listId = currentList.id;
     var newCard = req.body;
 
-    newCard.id = Cards.getLastId();
+    newCard.id = Cards.getLastId() + 1;
     newCard.position = Cards.getLastPosition();
+
+    if (!cardsData[listId]) {
+      cardsData[listId] = []; // create new object for lists's cards
+    }
     cardsData[listId].push(newCard); // add card to list's cards
+
     Cards.set(cardsData, { incrementId: true });
 
     res.json(newCard);
+  });
+
+router.route('/lists')
+  .post(function postRequestNewList(req, res) {
+    var listsData = Lists.get();
+    var newList = req.body;
+
+    newList.id = Lists.getLastId() + 1;
+    Lists.set(listsData, { incrementId: true });
+
+    res.json(newList);
   });
 
 
