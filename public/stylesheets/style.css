@@ -6,8 +6,12 @@
 
 body {
   background-color: rgb(0, 121, 191);
-  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
   margin: 0
+}
+
+body,
+textarea {
+  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 /* Header */
@@ -120,4 +124,5 @@ body {
   outline: none;
   border: none;
   border-radius: 3px;
+  width: 100%;
 }

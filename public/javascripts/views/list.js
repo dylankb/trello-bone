@@ -12,7 +12,7 @@ var ListView = Backbone.View.extend({
     e.preventDefault();
     $(e.currentTarget).hide();
 
-    this.NewCardModal = new NewCardModal();
+    this.NewCardModal = new NewCardModal({ model: this.model });
     this.$el.append(this.NewCardModal.el);
   },
   render: function() {

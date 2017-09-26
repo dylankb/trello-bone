@@ -18,6 +18,6 @@ templates['mainHeader'] = template({"compiler":[7,">= 4.0.0"],"main":function(co
     return "<div class=\"left-group\">\n  <div class=\"header-button header-md back-button\">\n    <i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>\n  </div>\n  <div class=\"header-button search\">\n    <input class=\"search-input\" type=\"text\">\n  </div>\n</div>\n\n<a class=\"logo\" href=\"/\">\n  <span class=\"logo-icon\"></span>\n</a>\n\n<div class=\"right-group\">\n  <div class=\"header-button header-md plus-button\">\n    <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n  </div>\n  <div class=\"header-button header-md notifications\">\n    <i class=\"fa fa-bell\" aria-hidden=\"true\"></i>\n  </div>\n  <div class=\"header-button header-md user-badge\">D\n  </div>\n</div>\n";
 },"useData":true});
 templates['newCard'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<textarea class=\"new-card-textarea\" cols=\"39\" rows=\"4\"></textarea>\n\n<fieldset class=\"controls\">\n  <input type=\"submit\" value=\"Add\">\n  <button class=\"cancel\">\n    <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n  </button>\n</fieldset>\n";
+    return "<textarea class=\"new-card-textarea\" cols=\"33\" rows=\"4\" name=\"title\"></textarea>\n\n<fieldset class=\"controls\">\n  <input type=\"submit\" value=\"Add\">\n  <button class=\"cancel\">\n    <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n  </button>\n</fieldset>\n";
 },"useData":true});
 })();
