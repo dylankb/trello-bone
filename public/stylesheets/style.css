@@ -10,7 +10,9 @@ body {
 }
 
 body,
-textarea {
+textarea,
+input,
+button {
   font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
@@ -84,6 +86,41 @@ textarea {
   height: 100%;
 }
 
+/* Board content */
+
+.lists,
+.add-list {
+  display: inline-block;
+}
+
+.add-list {
+  background: #026AA7;
+  border: none;
+  border-radius: 3px;
+  color: rgba(255,255,255,.7);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  width: 270px;
+}
+
+.new-list-modal {
+  background: rgb(226, 228, 230);
+  border-radius: 3px;
+  display: inline-block;
+  padding: 4px;
+  vertical-align: top;
+  width: 270px;
+}
+
+.new-list-input {
+  background: rgba(0,0,0,.05);
+  border-radius: 3px;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+}
+
 /* List */
 
 .board-content {
@@ -94,7 +131,8 @@ textarea {
   width: 270px;
   background: rgb(226, 228, 230);
   border-radius: 4px;
-  padding: 8px;
+  padding: 8px 10px;
+  margin-right: 10px;
 }
 
 .list-title {
@@ -108,21 +146,44 @@ textarea {
 
 /* Cards */
 
+.cards-view {
+  margin-bottom: 16px;
+}
+
 .card {
   background: white;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-  padding: 8px;
+  padding: 8px 10px;
   border-radius: 3px;
 }
 
 /* New Card Modal */
 
 .new-card-textarea {
-  resize: none;
-  outline: none;
   border: none;
   border-radius: 3px;
+  outline: none;
+  resize: none;
   width: 100%;
+}
+
+/* Buttons */
+
+.button {
+  border: none;
+}
+
+.button-add {
+  background: #5AAC44;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+
+.button-cancel {
+  background: inherit;
+  font-size: 22px;
 }

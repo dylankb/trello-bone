@@ -22,7 +22,7 @@ var NewCardModal = Backbone.View.extend({
     }.bind(this));
   },
   events: {
-    'click .cancel': 'removeModal',
+    'click .button-cancel': 'removeModal',
     'submit': 'createCard', // eslint-disable-line quote-props
   },
   removeModal: function() {
