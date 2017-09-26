@@ -86,6 +86,27 @@ button {
   height: 100%;
 }
 
+/* Board overview */
+
+.board-overview {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  width: 100%;
+}
+
+.board-overview .left-group {
+  align-items: baseline;
+}
+
+.board-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 8px;
+  padding: 4px 8px
+}
+
 /* Board content */
 
 .lists,

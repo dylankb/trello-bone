@@ -1,7 +1,8 @@
 var App = {
   init: function() {
     this.Header = new Header();
-    this.Content = new BoardContent({ collection: this.Lists });
+    this.BoardOverview = new BoardOverview();
+    this.BoardContent = new BoardContent({ collection: this.Lists });
 
     this.setupEventListener();
   },
@@ -9,5 +10,5 @@ var App = {
     document.addEventListener('submit', function(e) {
       e.preventDefault();
     });
-  }
+  },
 };

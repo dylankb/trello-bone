@@ -13,7 +13,7 @@ html
   body
     header.main-header
     main
-      header.board-header
+      header.board-overview
       div.board-content
         section.lists
         button.add-list Add to list...
@@ -23,6 +23,7 @@ html
     +javascript_include_tag("templatesCompiled")
     +javascript_include_tag("views/header")
     +javascript_include_tag("views/content")
+    +javascript_include_tag("views/overview")
     +javascript_include_tag("models/list")
     +javascript_include_tag("models/card")
     +javascript_include_tag("collections/lists")

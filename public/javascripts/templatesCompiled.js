@@ -23,4 +23,7 @@ templates['newCard'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
 templates['newList'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<input class=\"new-list-input\" name=\"title\" placeholder=\"Add a list...\">\n\n<fieldset class=\"controls\">\n  <input class=\"button button-add\" type=\"submit\" value=\"Add\">\n  <button class=\"button button-cancel\">\n    <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n  </button>\n</fieldset>\n";
 },"useData":true});
+templates['overview'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"left-group\">\n  <p class=\"board-title\">My Board</p>\n  <p>Team</p>\n</div>\n\n<div class=\"right-group\">\n  <span>...</span>\n  <p>Show Menu</p>\n</div>\n";
+},"useData":true});
 })();
