@@ -1,7 +1,7 @@
 var App = {
   init: function() {
     this.Header = new Header();
-    this.Lists.View = new ListsView({ collection: this.Lists });
+    this.Content = new BoardContent({ collection: this.Lists });
 
     this.setupEventListener();
   },

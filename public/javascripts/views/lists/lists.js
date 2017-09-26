@@ -1,5 +1,5 @@
 var ListsView = Backbone.View.extend({
-  el: '.board-content',
+  el: '.lists',
   initialize: function() {
     this.render();
     this.listenTo(this.collection, 'add', this.renderAdditionalList);
