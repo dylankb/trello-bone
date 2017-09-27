@@ -6,7 +6,7 @@ var CardDetailView = Backbone.View.extend({
     this.render();
   },
   events: {
-    'blur .card-title-edit': 'updateTitle',
+    'blur .card-title-edit-detail': 'updateTitle',
     'click .modal-overlay': 'remove',
     'click .card-close': 'remove',
   },

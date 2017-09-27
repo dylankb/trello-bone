@@ -1,0 +1,12 @@
+{{log model}}
+<div class="modal-overlay">
+</div>
+<form class="card-edit-view"
+      action="/lists/{{model.collection.List.attributes.id}}/cards/{{model.attributes.id}}"
+      method="put"
+>
+  <textarea class="card-edit-textarea" cols="33" rows="7" name="title">{{model.attributes.title}}</textarea>
+  <fieldset class="controls">
+    <input class="button button-add" type="submit" value="Save">
+  </fieldset>
+</form>

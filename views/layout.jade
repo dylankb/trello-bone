@@ -35,6 +35,7 @@ html
     +javascript_include_tag("views/cards/cards")
     +javascript_include_tag("views/cards/new")
     +javascript_include_tag("views/cards/detail")
+    +javascript_include_tag("views/cards/edit")
     script(type="text/javascript").
       App.Lists = new ListsCollection(!{ JSON.stringify(listsCollection) });
       var cardsData = !{ JSON.stringify(cardsCollection) };

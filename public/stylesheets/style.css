@@ -177,8 +177,8 @@ h2 { font-size: 18px; }
 
 /* Cards */
 
-.edit-card,
-.card-title {
+.card-title,
+.card-title-edit {
   padding: 5px;
 }
 
@@ -190,14 +190,16 @@ h2 { font-size: 18px; }
   margin-bottom: 12px;
 }
 
+.editing-card { position: relative; }
+
 .card {
   background: white;
+  border-radius: 3px;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
   padding: 4px 5px;
-  border-radius: 3px;
-  cursor: pointer;
 }
 
 .card:last-of-type {
@@ -229,14 +231,13 @@ h2 { font-size: 18px; }
   vertical-align: top;
 }
 
-.card-title-edit {
+.card-title-edit-detail {
   background-color: inherit;
   font-size: 18px;
   margin-left: 20px;
-  overflow: hidden;
 }
 
-.card-title-edit:focus {
+.card-title-edit-detail:focus {
   background-color: white;
 }
 
@@ -260,6 +261,24 @@ h2 { font-size: 18px; }
 .card-close {
   float: right;
   font-size: 22px;
+}
+
+/* Card Edit View */
+
+.card-edit-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.card-edit-view {
+  position: fixed;
+}
+
+.card-edit-textarea {
+  border-radius: 3px;
+  margin-bottom: 8px;
+  padding: 4px 5px;
 }
 
 /* Buttons */
