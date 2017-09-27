@@ -7,6 +7,17 @@ templates['card'] = template({"compiler":[7,">= 4.0.0"],"main":function(containe
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"title","hash":{},"data":data}) : helper)))
     + "</p>\n<a class=\"edit-card\">\n  <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>\n</a>\n";
 },"useData":true});
+templates['cardDetail'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<div class=\"modal-overlay\">\n</div>\n<form class=\"card-detail\"\n      method=\"put\"\n      action=\"/lists/"
+    + alias2(alias1(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.collection : stack1)) != null ? stack1.List : stack1)) != null ? stack1.attributes : stack1)) != null ? stack1.id : stack1), depth0))
+    + "/cards/"
+    + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.attributes : stack1)) != null ? stack1.id : stack1), depth0))
+    + "\"\n>\n  <div class=\"card-title-section\">\n    <span class=\"card-image\">\n      <i class=\"fa fa-window-maximize\" aria-hidden=\"true\"></i>\n    </span>\n    <textarea class=\"card-title-edit\" name=\"title\" rows=\"1\" cols=\"35\">"
+    + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.attributes : stack1)) != null ? stack1.title : stack1), depth0))
+    + "</textarea>\n    <span class=\"card-close\">\n      <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n    </span>\n  </div>\n</form>\n";
+},"useData":true});
 templates['list'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
@@ -24,6 +35,6 @@ templates['newList'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
     return "<input class=\"new-list-input\" name=\"title\" placeholder=\"Add a list...\">\n\n<fieldset class=\"controls\">\n  <input class=\"button button-add\" type=\"submit\" value=\"Add\">\n  <button class=\"button button-cancel\">\n    <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n  </button>\n</fieldset>\n";
 },"useData":true});
 templates['overview'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"left-group\">\n  <p class=\"board-title\">My Board</p>\n  <p>Team</p>\n</div>\n\n<div class=\"right-group\">\n  <span>...</span>\n  <p>Show Menu</p>\n</div>\n";
+    return "<div class=\"left-group\">\n  <h2 class=\"board-title\">My Board</h2>\n  <p>Team</p>\n</div>\n\n<div class=\"right-group\">\n  <span>...</span>\n  <p>Show Menu</p>\n</div>\n";
 },"useData":true});
 })();

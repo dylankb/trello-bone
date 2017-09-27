@@ -41,5 +41,17 @@ router.route('/lists')
     res.json(newList);
   });
 
+router.route('/lists/:listId/cards/:cardId')
+  .put(function putRequestCard(req, res) {
+    var cardsData = Cards.get();
+    var listId = req.params.listId;
+    var currentCard = _(cardsData[listId]).findWhere({ id: Number(req.params.cardId) });
+
+    currentCard.title = req.body.title;
+    Cards.set(cardsData, { incrementId: false });
+
+    res.json(currentCard);
+  });
+
 
 module.exports = router;

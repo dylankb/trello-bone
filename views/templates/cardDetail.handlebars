@@ -1,0 +1,16 @@
+<div class="modal-overlay">
+</div>
+<form class="card-detail"
+      method="put"
+      action="/lists/{{model.collection.List.attributes.id}}/cards/{{model.attributes.id}}"
+>
+  <div class="card-title-section">
+    <span class="card-image">
+      <i class="fa fa-window-maximize" aria-hidden="true"></i>
+    </span>
+    <textarea class="card-title-edit" name="title" rows="1" cols="35">{{model.attributes.title}}</textarea>
+    <span class="card-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
+  </div>
+</form>

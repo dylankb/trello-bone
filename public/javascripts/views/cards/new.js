@@ -23,7 +23,7 @@ var NewCardModal = Backbone.View.extend({
   },
   events: {
     'click .button-cancel': 'removeModal',
-    'submit': 'createCard', // eslint-disable-line quote-props
+    submit: 'createCard',
   },
   removeModal: function() {
     this.$el.closest('form').prev().show();

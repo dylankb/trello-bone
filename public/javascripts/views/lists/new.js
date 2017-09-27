@@ -24,7 +24,7 @@ var NewListModal = Backbone.View.extend({
   },
   events: {
     'click .button-cancel': 'removeModal',
-    'submit': 'createList', // eslint-disable-line quote-props
+    submit: 'createList',
   },
   removeModal: function() {
     this.$el.closest('form').prev().show();
