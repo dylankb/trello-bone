@@ -220,12 +220,8 @@ h2 { font-size: 18px; }
   position: fixed;
 }
 
-.card-detail {
-  padding: 8px;
-}
-
 .card-image {
-  font-size: 18px;
+  font-size: 20px;
 }
 .card-image i {
   vertical-align: top;
@@ -251,15 +247,22 @@ h2 { font-size: 18px; }
 }
 
 .card-detail {
-  position: fixed;
+  background: rgb(226, 228, 230);
+  padding: 12px 14px;
+  position: relative;
+}
+
+.card-detail-container {
   left: 50%;
   margin-left: -250px;
-  background: rgb(226, 228, 230);
+  position: fixed;
   width: 500px;
 }
 
 .card-close {
-  float: right;
+  position: absolute;
+  top: 4px;
+  right: 8px;
   font-size: 22px;
 }
 
