@@ -7,7 +7,6 @@ var BoardContent = Backbone.View.extend({
     this.ListsView = new ListsView({ collection: this.collection });
   },
   displayNewListModal: function(e) {
-    e.preventDefault();
     $(e.currentTarget).hide();
 
     this.NewListModal = new NewListModal({ collection: this.collection });

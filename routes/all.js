@@ -36,6 +36,7 @@ router.route('/lists')
     var newList = req.body;
 
     newList.id = Lists.getLastId() + 1;
+    listsData.push(newList);
     Lists.set(listsData, { incrementId: true });
 
     res.json(newList);
