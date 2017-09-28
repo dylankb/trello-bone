@@ -4,7 +4,7 @@ var CardEditView = Backbone.View.extend({
   },
   events: {
     'click .modal-overlay': 'removeModal',
-    submit: 'updateTitle',
+    'submit .card-edit-title-form': 'updateTitle',
   },
   initialize: function() {
     this.render();
@@ -17,7 +17,7 @@ var CardEditView = Backbone.View.extend({
     card.removeClass('editing-card');
     this.remove();
   },
-  template: Handlebars.templates.cardEdit,
+  template: Handlebars.templates.cardEditTitle,
   updateTitle: function(e) {
     var $form = $(e.target);
     var request = $.ajax({

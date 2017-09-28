@@ -48,7 +48,7 @@ router.route('/lists/:listId/cards/:cardId')
     var listId = req.params.listId;
     var currentCard = _(cardsData[listId]).findWhere({ id: Number(req.params.cardId) });
 
-    currentCard.title = req.body.title;
+    Object.assign(currentCard, req.body);
     Cards.set(cardsData, { incrementId: false });
 
     res.json(currentCard);

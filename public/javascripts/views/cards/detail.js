@@ -4,11 +4,34 @@ var CardDetailView = Backbone.View.extend({
   },
   initialize: function() {
     this.render();
+    this.listenTo(this.model, 'change:description', this.render);
   },
   events: {
-    'blur .card-title-edit-detail': 'updateTitle',
+    'blur .card-title-textarea-detail': 'updateTitle',
+    'click .card-add-description': 'displayAddDescriptionModal',
+    'click .card-edit-description': 'displayEditDescriptionModal',
     'click .modal-overlay': 'remove',
     'click .card-close': 'remove',
+  },
+  displayAddDescriptionModal: function(e) {
+    var editLink = $(e.target).parent();
+    e.preventDefault();
+    editLink.hide();
+
+    this.EditDescriptionView = new CardEditDescriptionView({
+      model: this.model,
+      hiddenElements: [editLink],
+    });
+  },
+  displayEditDescriptionModal: function(e) {
+    var description = this.$('.card-description-section');
+    description.hide();
+    e.preventDefault();
+
+    this.EditDescriptionView = new CardEditDescriptionView({
+      model: this.model,
+      hiddenElements: [description],
+    });
   },
   render: function() {
     this.$el.html(this.template({ model: this.model }));
@@ -25,9 +48,5 @@ var CardDetailView = Backbone.View.extend({
     request.done(function successCallback(data) {
       this.model.set('title', data.title);
     }.bind(this));
-
-    request.fail(function failureCallback(jqXHR, textStatus, errorThrown) {
-      console.log('XHR', jqXHR, 'Text status', textStatus, 'error', errorThrown);
-    });
   },
 });

@@ -220,20 +220,31 @@ h2 { font-size: 18px; }
   position: fixed;
 }
 
-.card-image {
-  font-size: 20px;
+.card-title-section {
+  font-size: 0;
+  margin-bottom: 20px;
 }
-.card-image i {
+
+.spacer-column {
+  display: inline-block;
+  width: 8%;
   vertical-align: top;
 }
 
-.card-title-edit-detail {
-  background-color: inherit;
-  font-size: 18px;
-  margin-left: 20px;
+.card-title-image {
+  font-size: 20px;
 }
 
-.card-title-edit-detail:focus {
+.card-title-image i {
+  vertical-align: top;
+}
+
+.card-title-textarea-detail {
+  background-color: inherit;
+  font-size: 18px;
+}
+
+.card-title-textarea-detail:focus {
   background-color: white;
 }
 
@@ -266,7 +277,45 @@ h2 { font-size: 18px; }
   font-size: 22px;
 }
 
-/* Card Edit View */
+.card-description,
+.card-description-label {
+  display: inline-block;
+}
+
+.card-description-label-container {
+  margin-bottom: 10px;
+}
+
+.card-description-label span {
+  color: grey;
+}
+
+/* Card Edit Description View*/
+
+.card-description-section {
+  padding-bottom: 16px;
+}
+
+.card-add-description,
+.card-edit-description {
+  padding-left: 4px;
+  text-decoration: underline;
+  color: grey;
+  width: 100%
+}
+
+.card-edit-description-container {
+  display: inline-block;
+}
+
+.card-edit-description-container-textarea {
+  border-radius: 3px;
+  margin-bottom: 8px;
+  padding: 8px;
+  outline: none;
+}
+
+/* Card Edit Title View */
 
 .card-edit-container {
   position: absolute;
@@ -274,7 +323,7 @@ h2 { font-size: 18px; }
   top: 0;
 }
 
-.card-edit-view {
+.card-edit-title-form {
   position: fixed;
 }
 
@@ -290,7 +339,7 @@ h2 { font-size: 18px; }
   border: none;
 }
 
-.button-add {
+.button-confirm {
   background: #5AAC44;
   border-radius: 3px;
   color: white;

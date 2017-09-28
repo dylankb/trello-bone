@@ -5,12 +5,37 @@
       action="/lists/{{model.collection.List.attributes.id}}/cards/{{model.attributes.id}}"
 >
   <div class="card-title-section">
-    <span class="card-image">
-      <i class="fa fa-window-maximize" aria-hidden="true"></i>
-    </span>
-    <textarea class="card-title-edit-detail" name="title" rows="1" cols="35">{{model.attributes.title}}</textarea>
+    <div class="spacer-column">
+      <span class="card-title-image">
+        <i class="fa fa-window-maximize" aria-hidden="true"></i>
+      </span>
+    </div>
+    <textarea class="card-title-textarea-detail" name="title" rows="1" cols="35">{{model.attributes.title}}</textarea>
     <span class="card-close">
       <i class="fa fa-times" aria-hidden="true"></i>
     </span>
+  </div>
+  <div class="card-description-section">
+    {{#if model.attributes.description}}
+      <div class="card-description-label-container">
+        <div class="spacer-column"></div>
+        <div class="card-description-label">
+          <span>Description</span>
+          <a class="card-edit-description" href="#">Edit</a>
+        </div>
+      </div>
+      <div class="spacer-column"></div>
+      <p class="card-description">{{model.attributes.description}}</p>
+    {{else}}
+      <div class="spacer-column"></div>
+      <span class="card-description-image">
+        <i class="fa fa-align-left" aria-hidden="true"></i>
+      </span>
+      <a class="card-add-description" href="#">Edit the description...</a>
+    {{/if}}
+  </div>
+  <div class="spacer-column"></div>
+  <div class="card-edit-description-container">
+
   </div>
 </form>
