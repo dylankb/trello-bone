@@ -5,11 +5,13 @@ A clone of the Trello task-management app using Express, Backbone, Sass, and mor
 #### Installation
 
 - Clone repo
-- In repository directory, run `npm install`
-- Run `npm start` and got to `localhost:3000` in your browser of choice
+- Get server dependencies: From repository directory, run `npm install`
+- Get client dependencies: Run `bower install`
+- Compile templates: Run `handlebars views/templates/ -f public/javascripts/templatesCompiled.js`
+- Run `npm start` and go to `localhost:3000` in your browser of choice
 
 #### Notes
 
 ##### Making template changes
 
-- This project uses [precompiled Handlebars templates](http://handlebarsjs.com/precompilation.html). Currently precompiling is a manual process, so if you change one of the .handlebars files, from the project directory run `handlebars views/templates/ -f public/javascripts/templatesCompiled.js`.
+- This project uses [precompiled Handlebars templates](http://handlebarsjs.com/precompilation.html). Currently precompiling is a manual process, so if you make further changes to a `.handlebars` files run `handlebars views/templates/ -f public/javascripts/templatesCompiled.js` from the project directory.

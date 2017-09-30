@@ -6,10 +6,7 @@ html
     title= Trello
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
-    script(src="/bower_components/jquery/dist/jquery.js")
-    script(src="/bower_components/underscore/underscore.js")
-    script(src="/bower_components/handlebars/handlebars.js")
-    script(src="/bower_components/backbone/backbone.js")
+    link(rel='stylesheet', href='bower_components/dragula.js/dist/dragula.css')
   body
     header.main-header
     main
@@ -19,6 +16,12 @@ html
         button.add-list Add to list...
       block content
     
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src="/bower_components/underscore/underscore.js")
+    script(src="/bower_components/handlebars/handlebars.js")
+    script(src="/bower_components/backbone/backbone.js")
+    script(src="/bower_components/backbone/backbone.js")
+    script(src="/bower_components/dragula.js/dist/dragula.js")
     +javascript_include_tag("application")
     +javascript_include_tag("templatesCompiled")
     +javascript_include_tag("views/header")
