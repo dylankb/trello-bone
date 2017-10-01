@@ -4,9 +4,9 @@ var App = {
     this.BoardOverview = new BoardOverview();
     this.BoardContent = new BoardContent({ collection: this.Lists });
 
-    this.setupEventListener();
+    this.preventDefaultSubmitActions();
   },
-  setupEventListener: function() {
+  preventDefaultSubmitActions: function() {
     document.addEventListener('submit', function(e) {
       e.preventDefault();
     });

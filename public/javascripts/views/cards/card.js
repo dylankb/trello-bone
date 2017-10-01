@@ -12,8 +12,11 @@ var CardView = Backbone.View.extend({
   },
   displayEditView: function() {
     this.$el.addClass('editing-card');
-    this.EditView = new CardEditView({ model: this.model });
-    this.$el.append(this.EditView.el);
+    this.EditTitleView = new CardEditView({
+      model: this.model,
+      card: this,
+    });
+    this.$el.append(this.EditTitleView.el);
   },
   events: {
     'click .card-title': 'displayDetailView',
