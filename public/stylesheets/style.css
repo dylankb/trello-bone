@@ -122,6 +122,20 @@ h2 { font-size: 18px; }
   display: inline-block;
 }
 
+.list-view.dragging.gu-transit {
+  background: rgba(0,0,0,.6);
+  font-size: 0;
+  line-height: 14px;
+}
+
+.list-view.dragging.gu-transit .card {
+  background: transparent;
+}
+
+.list-view.dragging.gu-mirror {
+  transform: rotate(3deg);
+}
+
 .add-list {
   background: #026AA7;
   border: none;
@@ -187,7 +201,7 @@ h2 { font-size: 18px; }
 }
 
 .cards-view {
-  margin-bottom: 12px;
+  padding-bottom: 12px;
 }
 
 .editing-card { position: relative; }
@@ -202,8 +216,15 @@ h2 { font-size: 18px; }
   padding: 4px 5px;
 }
 
-.card:last-of-type {
-  margin-bottom: 16px;
+.card.dragging.gu-mirror {
+  transform: rotate(3deg);
+}
+
+.card.dragging.gu-transit {
+  background-color: darkgrey;
+  opacity: .9;
+  font-size: 0;
+  line-height: 14px;
 }
 
 /* New Card Modal */

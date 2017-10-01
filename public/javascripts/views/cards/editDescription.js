@@ -10,7 +10,7 @@ var CardEditDescriptionView = Backbone.View.extend({
   },
   emptyView: function(e) {
     this.revealHiddenElements();
-    this.$el.empty();     // Empties, not removes, view DOM element - similar to remove method
+    this.$el.empty().off();     // Empties, not removes, view DOM element - similar to remove method
     this.stopListening(); // http://backbonejs.org/docs/backbone.html#section-158
   },
   revealHiddenElements: function() {
