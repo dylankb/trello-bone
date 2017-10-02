@@ -16,10 +16,9 @@ module.exports = {
     return this.__readFile().last_position;
   },
   set: function(data, options) {
-    data.id = this.getLastId();
-    if (options.incrementId) { data.id += 1; }
+    var id = options.incrementId ? this.getLastId() + 1 : this.getLastId();
     fs.writeFileSync(filePath, JSON.stringify({
-      last_id: data.id,
+      last_id: id,
       data: data,
     }), 'utf8');
   },

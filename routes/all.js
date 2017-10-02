@@ -7,6 +7,20 @@ var index = require('./index');
 var Lists = require(path.resolve(path.dirname(__dirname), 'modules/lists'));
 var Cards = require(path.resolve(path.dirname(__dirname), 'modules/cards'));
 
+var findPosition = function(cardsData, listId) {
+  var position;
+  if (_(cardsData[listId]).isEmpty()) {
+    position = 0;
+  } else {
+    lastCard = _.max(cardsData[listId], function findLastCard(card) {
+      return card.position;
+    });
+    position = lastCard.position + 1;
+  }
+
+  return position;
+};
+
 /* GET home page. */
 router.get('/', index.route);
 
@@ -16,13 +30,15 @@ router.route('/lists/:id/cards')
     var cardsData = Cards.get();
     var listId = currentList.id;
     var newCard = req.body;
+    var position;
+
+    if (!req.body.position) {
+      position = findPosition(cardsData, listId);
+      newCard.position = position;
+    }
 
     newCard.id = Cards.getLastId() + 1;
-    newCard.position = Cards.getLastPosition();
 
-    if (!cardsData[listId]) {
-      cardsData[listId] = []; // create new object for lists's cards
-    }
     cardsData[listId].push(newCard); // add card to list's cards
 
     Cards.set(cardsData, { incrementId: true });
@@ -34,10 +50,14 @@ router.route('/lists')
   .post(function postRequestNewList(req, res) {
     var listsData = Lists.get();
     var newList = req.body;
+    var cardsData = Cards.get();
 
     newList.id = Lists.getLastId() + 1;
     listsData.push(newList);
     Lists.set(listsData, { incrementId: true });
+
+    cardsData[newList.id] = [];
+    Cards.set(cardsData, { incrementId: false });
 
     res.json(newList);
   });
