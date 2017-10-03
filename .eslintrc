@@ -1,6 +1,7 @@
 {
   "extends": "airbnb-base/legacy",
   "rules": {
+    "consistent-return": 1,
     "func-names": ["warn", "as-needed"],
     "indent": ["error", 2],
     "space-before-function-paren": ["error", {
