@@ -31,7 +31,7 @@ var ListsView = Backbone.View.extend({
   },
   getSiblingPosition: function($sibling, list) {
     if (!$sibling.length) { return; }
-    var siblingModel = list.Cards.get($sibling.data('id'));
+    var siblingModel = list.Cards.get($sibling.attr('data-id'));
     var siblingPostition = siblingModel.get('position');
     return siblingPostition;
   },
@@ -44,11 +44,16 @@ var ListsView = Backbone.View.extend({
       sibling.save({ position: sibling.attributes.position + 1 });
     });
   },
-  moveCardToTargetList: function(card, targetList) {
+  moveCardToTargetList: function(card, targetList, el) {
     var cardData = card.toJSON();
     delete cardData.id; // the create method triggers a put request if there is an id
     card.destroy(); // remove from source list
-    targetList.Cards.create(cardData, { silent: true });
+    targetList.Cards.create(cardData, {
+      success: this.updateDraggedElementDataId,
+      draggedElement: el,
+      silent: true,
+      wait: true, // wait for _byId reference to populate
+    });
   },
   enableDraggingForListCards: function(listView) {
     var cardContainer = listView.$('.cards-view')[0];
@@ -73,9 +78,9 @@ var ListsView = Backbone.View.extend({
     }).on('dragend', function onDragEnd(el) {
       $(el).removeClass('dragging');
     }).on('drop', function onDrop(el, target, source, sibling) {
-      var sourceList = App.Lists.get($(source).data('id'));
-      var targetList = App.Lists.get($(target).data('id'));
-      var card = sourceList.Cards.get($(el).data('id'));
+      var sourceList = App.Lists.get($(source).attr('data-id'));
+      var targetList = App.Lists.get($(target).attr('data-id'));
+      var card = sourceList.Cards.get($(el).attr('data-id'));
       var precedingSibling = $(el).prev('li.card');
       var siblingPosition = this.getSiblingPosition($(sibling), targetList);
       var precedingSiblingPosition = this.getSiblingPosition(precedingSibling, targetList);
@@ -101,6 +106,9 @@ var ListsView = Backbone.View.extend({
     }
 
     card.set('position', position);
+  },
+  updateDraggedElementDataId: function(model, response, options) {
+    $(options.draggedElement).attr('data-id', model.attributes.id);
   },
   updateSourceListCardPositions: function(card, siblingPosition, precedingSiblingPosition, sourceList) {
     var cardPosition = card.get('position');
