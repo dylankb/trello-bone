@@ -32,7 +32,7 @@ router.route('/lists/:id/cards')
     var newCard = req.body;
     var position;
 
-    if (!req.body.position) {
+    if (_.isUndefined(req.body.position)) {
       position = findPosition(cardsData, listId);
       newCard.position = position;
     }
@@ -72,6 +72,18 @@ router.route('/lists/:listId/cards/:cardId')
     Cards.set(cardsData, { incrementId: false });
 
     res.json(currentCard);
+  })
+  .delete(function deleteRequestCard(req, res) {
+    var cardsData = Cards.get();
+    var listId = req.params.listId;
+    var updatedListCards = _(cardsData[listId]).reject(function rejectCard(card) {
+      return card.id === Number(req.params.cardId);
+    });
+
+    cardsData[listId] = updatedListCards;
+    Cards.set(cardsData, { incrementId: false });
+
+    res.status(200).end();
   });
 
 

@@ -12,9 +12,18 @@ var ListsView = Backbone.View.extend({
   checkCardDraggedUp: function(nextSiblingPosition, position) {
     return nextSiblingPosition < position;
   },
+  decrementFollowingSiblings: function(sourceList, cardPosition) {
+    var followingSiblings = sourceList.Cards.filter(function findFollowingSiblings(sibling) {
+      return sibling.get('position') > cardPosition;
+    });
+
+    followingSiblings.forEach(function decrementSibling(sibling) {
+      sibling.save({ position: sibling.attributes.position - 1 });
+    });
+  },
   decrementPrecedingSiblingPosition: function(el, list, cardPosition) {
-    var additionalPrecedingSiblings = $(el).prevAll();
-    $.each(additionalPrecedingSiblings, function incrementPositionForSibling(index, element) {
+    var precedingSiblings = $(el).prevAll();
+    $.each(precedingSiblings, function decrementSiblingPositions(index, element) {
       var modelId = $(element).data('id');
       var model = list.Cards.get(modelId);
       var modelPosition = model.attributes.position;
@@ -36,6 +45,12 @@ var ListsView = Backbone.View.extend({
       var model = list.Cards.get(modelId);
       model.save({ position: model.attributes.position + 1 });
     });
+  },
+  moveCardToTargetList: function(card, targetList) {
+    var cardData = card.toJSON();
+    delete cardData.id; // the create method triggers a put request if there is an id
+    card.destroy(); // remove from source list
+    targetList.Cards.create(cardData, { silent: true });
   },
   enableDraggingForListCards: function(listView) {
     var cardContainer = listView.$('.cards-view')[0];
@@ -71,7 +86,8 @@ var ListsView = Backbone.View.extend({
       if (sourceList === targetList) {
         this.updateSourceListCardPositions(el, card, cardPosition, siblingPosition, precedingSiblingPosition, sourceList);
       } else {
-        this.updateTargetListCardPositions(targetList, sourceList, card, sibling, siblingPosition, el);
+        this.decrementFollowingSiblings(sourceList, cardPosition);
+        this.updateTargetListCardPositions(targetList, sourceList, card, sibling, siblingPosition, el, precedingSiblingPosition);
       }
     }.bind(this));
   },
@@ -87,5 +103,18 @@ var ListsView = Backbone.View.extend({
     }
     card.save();
   },
+  updateTargetListCardPositions: function(targetList, sourceList, card, sibling, siblingPosition, el, precedingSiblingPosition) {
+    var position;
+    if (targetList.Cards.isEmpty()) {
+      position = 0;
+    } else if (sibling) {
+      position = siblingPosition;
+      this.incrementFollowingSiblings(el, targetList);
+    } else {
+      position = precedingSiblingPosition + 1;
+    }
+
+    card.set('position', position);
+    this.moveCardToTargetList(card, targetList, sourceList);
   },
 });
