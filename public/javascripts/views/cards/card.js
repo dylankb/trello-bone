@@ -1,6 +1,9 @@
 var CardView = Backbone.View.extend({
-  attributes: {
-    class: 'card',
+  attributes: function() {
+    return {
+      class: 'card',
+      'data-id': this.model.attributes.id,
+    };
   },
   initialize: function() {
     this.render();
