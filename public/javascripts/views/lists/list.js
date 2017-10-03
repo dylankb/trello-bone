@@ -1,6 +1,9 @@
 var ListView = Backbone.View.extend({
-  attributes: {
-    class: 'list-view',
+  attributes: function() {
+    return {
+      class: 'list-view',
+      'data-id': this.model.attributes.id,
+    };
   },
   initialize: function() {
     this.render();

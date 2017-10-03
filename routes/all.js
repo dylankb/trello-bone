@@ -21,6 +21,20 @@ var findPosition = function(cardsData, listId) {
   return position;
 };
 
+var findListPosition = function(listData, listId) {
+  var position;
+  if (_(listData).isEmpty()) {
+    position = 0;
+  } else {
+    lastList = _.max(listData, function findLastList(list) {
+      return list.position;
+    });
+    position = lastList.position + 1;
+  }
+
+  return position;
+};
+
 /* GET home page. */
 router.get('/', index.route);
 
@@ -53,6 +67,8 @@ router.route('/lists')
     var cardsData = Cards.get();
 
     newList.id = Lists.getLastId() + 1;
+    newList.position = findListPosition(listsData);
+
     listsData.push(newList);
     Lists.set(listsData, { incrementId: true });
 
@@ -60,6 +76,17 @@ router.route('/lists')
     Cards.set(cardsData, { incrementId: false });
 
     res.json(newList);
+  });
+
+router.route('/lists/:id')
+  .put(function putRequestList(req, res) {
+    var listsData = Lists.get();
+    var currentList = _(listsData).findWhere({ id: Number(req.params.id) });
+
+    Object.assign(currentList, req.body);
+    Lists.set(listsData, { incrementId: false });
+
+    res.json(currentList);
   });
 
 router.route('/lists/:listId/cards/:cardId')
