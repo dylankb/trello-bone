@@ -4,7 +4,6 @@ var ListsView = Backbone.View.extend({
     this.setCardDraggingOptions();
     this.render();
     this.listenTo(this.collection, 'add', this.renderAdditionalList);
-    this.listenTo(this.collection, 'remove', this.removeListCardsFromDragging);
   },
   checkCardDraggedDown: function(precedingSiblingPosition, position) {
     return precedingSiblingPosition > position;
@@ -21,15 +20,13 @@ var ListsView = Backbone.View.extend({
       sibling.save({ position: sibling.attributes.position - 1 });
     });
   },
-  decrementPrecedingSiblingPosition: function(el, list, cardPosition) {
-    var precedingSiblings = $(el).prevAll();
-    $.each(precedingSiblings, function decrementSiblingPositions(index, element) {
-      var modelId = $(element).data('id');
-      var model = list.Cards.get(modelId);
-      var modelPosition = model.attributes.position;
-      if (modelPosition > cardPosition) { // Leave cards aboved card moved down unchanged
-        model.save({ position: modelPosition - 1 });
-      }
+  decrementPrecedingSiblingPositions: function(list, cardPosition) {
+    var precedingSiblings = list.Cards.filter(function findPrecedingSiblings(sibling) {
+      return sibling.get('position') <= cardPosition; // update position for elements pushed up by drop
+    });
+
+    precedingSiblings.forEach(function decrementSibling(sibling) {
+      sibling.save({ position: sibling.attributes.position - 1 });
     });
   },
   getSiblingPosition: function($sibling, list) {
@@ -38,12 +35,13 @@ var ListsView = Backbone.View.extend({
     var siblingPostition = siblingModel.get('position');
     return siblingPostition;
   },
-  incrementFollowingSiblings: function(el, list) {
-    var additionalSiblings = $(el).nextAll();
-    $.each(additionalSiblings, function incrementPositionForSibling(index, element) {
-      var modelId = $(element).data('id');
-      var model = list.Cards.get(modelId);
-      model.save({ position: model.attributes.position + 1 });
+  incrementFollowingSiblings: function(list, newPosition) {
+    var followingSiblings = list.Cards.filter(function findFollowingSiblings(sibling) {
+      return sibling.get('position') >= newPosition; // update position of cards pushed down by drop
+    });
+
+    followingSiblings.forEach(function incrementSibling(sibling) {
+      sibling.save({ position: sibling.attributes.position + 1 });
     });
   },
   moveCardToTargetList: function(card, targetList) {
@@ -79,42 +77,42 @@ var ListsView = Backbone.View.extend({
       var targetList = App.Lists.get($(target).data('id'));
       var card = sourceList.Cards.get($(el).data('id'));
       var precedingSibling = $(el).prev('li.card');
-      var cardPosition = card.get('position');
       var siblingPosition = this.getSiblingPosition($(sibling), targetList);
       var precedingSiblingPosition = this.getSiblingPosition(precedingSibling, targetList);
 
       if (sourceList === targetList) {
-        this.updateSourceListCardPositions(el, card, cardPosition, siblingPosition, precedingSiblingPosition, sourceList);
+        this.updateSourceListCardPositions(card, siblingPosition, precedingSiblingPosition, sourceList);
       } else {
-        this.decrementFollowingSiblings(sourceList, cardPosition);
-        this.updateTargetListCardPositions(targetList, sourceList, card, sibling, siblingPosition, el, precedingSiblingPosition);
+        this.decrementFollowingSiblings(sourceList, card.get('position'));
+        this.setTargetListCardPositions(card, targetList, siblingPosition, precedingSiblingPosition);
+        this.moveCardToTargetList(card, targetList, el);
       }
     }.bind(this));
   },
-  updateSourceListCardPositions: function(el, card, cardPosition, siblingPosition, precedingSiblingPosition, list) {
-    var draggedDown = this.checkCardDraggedDown(precedingSiblingPosition, cardPosition);
-    var draggedUp = this.checkCardDraggedUp(siblingPosition, cardPosition);
-    if (draggedUp) {
-      card.set('position', siblingPosition); // set position to position of sibling moved down
-      this.incrementFollowingSiblings(el, list);
-    } else if (draggedDown) {
-      card.set('position', precedingSiblingPosition); // set position to position of sibling moved down
-      this.decrementPrecedingSiblingPosition(el, list, cardPosition);
-    }
-    card.save();
-  },
-  updateTargetListCardPositions: function(targetList, sourceList, card, sibling, siblingPosition, el, precedingSiblingPosition) {
+  setTargetListCardPositions: function(card, targetList, siblingPosition, precedingSiblingPosition) {
     var position;
     if (targetList.Cards.isEmpty()) {
       position = 0;
-    } else if (sibling) {
+    } else if (!_.isUndefined(siblingPosition)) {
       position = siblingPosition;
-      this.incrementFollowingSiblings(el, targetList);
+      this.incrementFollowingSiblings(targetList, position);
     } else {
       position = precedingSiblingPosition + 1;
     }
 
     card.set('position', position);
-    this.moveCardToTargetList(card, targetList, sourceList);
+  },
+  updateSourceListCardPositions: function(card, siblingPosition, precedingSiblingPosition, sourceList) {
+    var cardPosition = card.get('position');
+    var draggedDown = this.checkCardDraggedDown(precedingSiblingPosition, cardPosition);
+    var draggedUp = this.checkCardDraggedUp(siblingPosition, cardPosition);
+    if (draggedUp) {
+      card.set('position', siblingPosition); // set position to position of sibling moved down
+      this.incrementFollowingSiblings(sourceList, card.get('position'));
+    } else if (draggedDown) {
+      card.set('position', precedingSiblingPosition); // set position to position of sibling moved down
+      this.decrementPrecedingSiblingPositions(sourceList, card.get('position'));
+    }
+    card.save();
   },
 });
