@@ -15,13 +15,8 @@ html
         section.lists
         button.add-list Add to list...
       block content
-    
-    script(src="/bower_components/jquery/dist/jquery.js")
-    script(src="/bower_components/underscore/underscore.js")
-    script(src="/bower_components/handlebars/handlebars.js")
-    script(src="/bower_components/backbone/backbone.js")
-    script(src="/bower_components/backbone/backbone.js")
-    script(src="/bower_components/dragula.js/dist/dragula.js")
+
+    +javascript_include_tag("vendor/all")
     +javascript_include_tag("application")
     +javascript_include_tag("templatesCompiled")
     +javascript_include_tag("views/baseView")
