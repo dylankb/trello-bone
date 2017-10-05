@@ -1,4 +1,4 @@
-var CardEditDescriptionView = Backbone.View.extend({
+var CardEditDescriptionView = BaseView.extend({
   el: '.card-edit-description-container',
   events: {
     'click .button-cancel': 'emptyView',
@@ -10,8 +10,7 @@ var CardEditDescriptionView = Backbone.View.extend({
   },
   emptyView: function(e) {
     this.revealHiddenElements();
-    this.$el.empty().off();     // Empties, not removes, view DOM element - similar to remove method
-    this.stopListening(); // http://backbonejs.org/docs/backbone.html#section-158
+    this.dump();
   },
   revealHiddenElements: function() {
     this.hiddenElements.forEach(function revealElement(element) {

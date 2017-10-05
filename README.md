@@ -5,7 +5,8 @@ A clone of the Trello task-management app using Express, Backbone, Sass, and mor
 #### Installation
 
 - Clone repo
-- Get server dependencies: From repository directory, run `npm install`
+- Navigate with your terminal to the newly cloned folder, and run the following commands:
+- Get server dependencies: Run `npm install`
 - Get client dependencies: Run `bower install`
 - Compile templates: Run `handlebars views/templates/ -f public/javascripts/templatesCompiled.js`
 - Run `npm start` and go to `localhost:3000` in your browser of choice
