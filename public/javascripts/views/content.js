@@ -8,7 +8,7 @@ var BoardContent = Backbone.View.extend({
     this.setupListDragging();
   },
   decrementPrecedingListPositions: function(prevSiblingPosition, draggedListPosition) {
-    var precedingLists = App.Lists.filter(function findPrecedingLists(list) {
+    var precedingLists = App.Board.Lists.filter(function findPrecedingLists(list) {
       var siblingPosition = list.get('position');
       var isLeftOfInsertion = (siblingPosition <= prevSiblingPosition);
       var isRightOfExtraction = siblingPosition > draggedListPosition;
@@ -28,12 +28,12 @@ var BoardContent = Backbone.View.extend({
   },
   getSiblingPosition: function($sibling) {
     if (!$sibling.length) { return; }
-    var siblingModel = App.Lists.get($sibling.attr('data-id'));
+    var siblingModel = App.Board.Lists.get($sibling.attr('data-id'));
     var siblingPostition = siblingModel.get('position');
     return siblingPostition;
   },
   incrementNextListPositions: function(nextSiblingPosition, draggedListPosition) {
-    var followingLists = App.Lists.filter(function findFollowingLists(list) {
+    var followingLists = App.Board.Lists.filter(function findFollowingLists(list) {
       var siblingPosition = list.get('position');
       var isRightOfInsertion = siblingPosition >= nextSiblingPosition;
       var isLeftOfExtraction = siblingPosition < draggedListPosition;
@@ -57,7 +57,7 @@ var BoardContent = Backbone.View.extend({
     }).on('dragend', function onDragEnd(el) {
       $(el).removeClass('dragging');
     }).on('drop', function onDrop(el, target, source, sibling) {
-      var draggedList = App.Lists.get($(el).attr('data-id'));
+      var draggedList = App.Board.Lists.get($(el).attr('data-id'));
       var draggedListPosition = draggedList.get('position');
       var precedingList = $(el).prev('.list-view');
       var precedingListPosition = this.getSiblingPosition(precedingList);

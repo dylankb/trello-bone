@@ -90,8 +90,8 @@ var ListsView = Backbone.View.extend({
     }).on('dragend', function onDragEnd(el) {
       $(el).removeClass('dragging');
     }).on('drop', function onDrop(el, target, source, sibling) {
-      var sourceList = App.Lists.get($(source).attr('data-id'));
-      var targetList = App.Lists.get($(target).attr('data-id'));
+      var sourceList = App.Board.Lists.get($(source).attr('data-id'));
+      var targetList = App.Board.Lists.get($(target).attr('data-id'));
       var card = sourceList.Cards.get($(el).attr('data-id'));
       var precedingSibling = $(el).prev('li.card');
       var siblingPosition = this.getSiblingPosition($(sibling), targetList);

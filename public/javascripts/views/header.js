@@ -24,7 +24,7 @@ var Header = Backbone.View.extend({
   },
   displaySearchResults: function(e) {
     if (e.target.value) {
-      var searchResults = App.Lists.searchCards(e.target.value);
+      var searchResults = App.Board.Lists.searchCards(e.target.value);
       this.SearchModal.render({ noSearch: false, searchResults: searchResults });
     } else {
       this.SearchModal.render({ noSearch: true });

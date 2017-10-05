@@ -24,6 +24,7 @@ html
     +javascript_include_tag("views/content")
     +javascript_include_tag("views/overview")
     +javascript_include_tag("views/searchModal")
+    +javascript_include_tag("models/board")
     +javascript_include_tag("models/list")
     +javascript_include_tag("models/card")
     +javascript_include_tag("collections/lists")
@@ -38,9 +39,10 @@ html
     +javascript_include_tag("views/cards/editTitle")
     +javascript_include_tag("views/cards/editDescription")
     script(type="text/javascript").
-      App.Lists = new ListsCollection(!{ JSON.stringify(listsCollection) });
-      var cardsData = !{ JSON.stringify(cardsCollection) };
-      App.Lists.models.forEach(function(list) {
-        list.Cards.reset(cardsData[list.get('id')]);
+      App.Board = new BoardModel(!{ JSON.stringify(boardData) });
+      App.Board.Lists = new ListsCollection(!{ JSON.stringify(listsData) });
+      var cards = !{ JSON.stringify(cardsData) };
+      App.Board.Lists.models.forEach(function(list) {
+        list.Cards.reset(cards[list.get('id')]);
       });
       App.init();
