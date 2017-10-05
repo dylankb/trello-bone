@@ -1,0 +1,16 @@
+{{#if searchResults}}
+  <h2 class="search-title">Cards</h2>
+{{else if noSearch}}
+  <h2 class="search-title">Search</h2>
+{{/if}}
+<div class="search-results{{#if noSearch}} no-search-spacing {{/if}}">
+  {{#unless noSearch}}
+    {{#if searchResults}}
+      {{#each searchResults}}
+        {{> searchResult}}
+      {{/each}}
+    {{else}}
+      <p class="no-results">No search results found</p>
+    {{/if}}
+  {{/unless}}
+</div>

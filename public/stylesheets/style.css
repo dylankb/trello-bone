@@ -23,7 +23,12 @@ textarea {
   border: none;
 }
 
-h2 { font-size: 18px; }
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bold { font-weight: bold; }
 
 /* Header */
 
@@ -62,6 +67,27 @@ h2 { font-size: 18px; }
   color: black;
 }
 
+.logo {
+  height: 30px;
+  width: 80px;
+  position: relative;
+  top: 5px;
+}
+
+.logo-icon {
+  display: block;
+  background: url('https://a.trellocdn.com/images/01ef898811a879595cea8ac3cd77a155/header-logo-2x.png') no-repeat;
+  background-size: 80px 30px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Search */
+
+.search {
+  position: relative;
+}
+
 .search-input {
   width: 180px;
   background-color: inherit;
@@ -80,19 +106,63 @@ h2 { font-size: 18px; }
 
 }
 
-.logo {
-  height: 30px;
-  width: 80px;
-  position: relative;
-  top: 5px;
+.search-modal {
+  color: black;
+  position: absolute;
+  left: 0;
+  top: 36px;
 }
 
-.logo-icon {
-  display: block;
-  background: url('https://a.trellocdn.com/images/01ef898811a879595cea8ac3cd77a155/header-logo-2x.png') no-repeat;
-  background-size: 80px 30px;
-  width: 100%;
-  height: 100%;
+.search-modal-content {
+  background: rgb(226, 228, 230);
+  border-radius: 3px;
+  padding: 10px 12px;
+  width: 600px;
+}
+
+.search-title {
+  border-bottom: 1.5px solid rgb(216, 218, 220);
+  padding-bottom: 4px;
+}
+
+.search-results {
+  padding: 10px 0;
+}
+
+.result-row {
+  margin-bottom: 10px;
+}
+
+.result-button,
+.result-detail {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.result-button {
+  background: white;
+  border-radius: 3px;
+  margin-right: 10px;
+  padding: 6px 8px;
+  width: 180px;
+}
+
+.result-title {
+  font-weight: bold;
+}
+
+.result-info {
+  color: rgb(131, 140, 145);
+}
+
+.no-search-spacing {
+  padding-bottom: 40px;
+}
+
+.no-results {
+  text-align: center;
+  color: grey;
+  padding: 20px;
 }
 
 /* Board overview */
@@ -110,7 +180,6 @@ h2 { font-size: 18px; }
 }
 
 .board-title {
-  font-weight: bold;
   margin-right: 8px;
   padding: 4px 8px
 }
