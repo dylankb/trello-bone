@@ -7,10 +7,12 @@ var BoardContent = Backbone.View.extend({
     this.ListsView = new ListsView({ collection: this.collection });
     this.setupListDragging();
   },
-  decrementPrecedingListPositions: function(prevSiblingPosition, listPosition) {
+  decrementPrecedingListPositions: function(prevSiblingPosition, draggedListPosition) {
     var precedingLists = App.Lists.filter(function findPrecedingLists(list) {
       var siblingPosition = list.get('position');
-      return (siblingPosition <= prevSiblingPosition) && (siblingPosition !== listPosition);
+      var isLeftOfInsertion = (siblingPosition <= prevSiblingPosition);
+      var isRightOfExtraction = siblingPosition > draggedListPosition;
+      return isLeftOfInsertion && isRightOfExtraction;
       // update position for elements pushed left
     });
 
@@ -30,10 +32,12 @@ var BoardContent = Backbone.View.extend({
     var siblingPostition = siblingModel.get('position');
     return siblingPostition;
   },
-  incrementNextListPositions: function(nextSiblingPosition, listPosition) {
+  incrementNextListPositions: function(nextSiblingPosition, draggedListPosition) {
     var followingLists = App.Lists.filter(function findFollowingLists(list) {
       var siblingPosition = list.get('position');
-      return (siblingPosition >= nextSiblingPosition) && (siblingPosition !== listPosition);
+      var isRightOfInsertion = siblingPosition >= nextSiblingPosition;
+      var isLeftOfExtraction = siblingPosition < draggedListPosition;
+      return isRightOfInsertion && isLeftOfExtraction;
       // update position for elements pushed right
     });
 
@@ -53,23 +57,23 @@ var BoardContent = Backbone.View.extend({
     }).on('dragend', function onDragEnd(el) {
       $(el).removeClass('dragging');
     }).on('drop', function onDrop(el, target, source, sibling) {
-      var list = App.Lists.get($(el).attr('data-id'));
-      var listPosition = list.get('position');
+      var draggedList = App.Lists.get($(el).attr('data-id'));
+      var draggedListPosition = draggedList.get('position');
       var precedingList = $(el).prev('.list-view');
       var precedingListPosition = this.getSiblingPosition(precedingList);
       var nextListPosition = this.getSiblingPosition($(sibling));
-      var draggedRight = precedingListPosition > listPosition;
-      var draggedLeft = nextListPosition < listPosition;
+      var draggedRight = precedingListPosition > draggedListPosition;
+      var draggedLeft = nextListPosition < draggedListPosition;
 
       if (draggedLeft) {
-        this.incrementNextListPositions(nextListPosition, listPosition);
-        list.set('position', nextListPosition);
+        this.incrementNextListPositions(nextListPosition, draggedListPosition);
+        draggedList.set('position', nextListPosition);
       } else if (draggedRight) {
-        this.decrementPrecedingListPositions(precedingListPosition, listPosition);
-        list.set('position', precedingListPosition);
+        this.decrementPrecedingListPositions(precedingListPosition, draggedListPosition);
+        draggedList.set('position', precedingListPosition);
       }
 
-      list.save();
+      draggedList.save();
     }.bind(this));
   },
 });
