@@ -9,11 +9,13 @@ var Header = Backbone.View.extend({
     this.render();
   },
   displaySearchModal: function() {
+    this.styleSearchInput();
     this.SearchModal = new SearchModal({ noSearch: true });
     this.$('.search-modal').html(this.SearchModal.el); // can remove?
   },
   removeSearchModal: function(e) {
     e.target.value = '';
+    this.$('.icon-magnifier i').removeClass('fa-times').addClass('fa-search');
     if (this.SearchResults) { this.SearchResults.remove(); }
     this.SearchModal.remove();
   },
@@ -29,4 +31,7 @@ var Header = Backbone.View.extend({
     }
   },
   template: Handlebars.templates.mainHeader,
+  styleSearchInput: function() {
+    this.$('.icon-magnifier i').removeClass('fa-search').addClass('fa-times');
+  },
 });
