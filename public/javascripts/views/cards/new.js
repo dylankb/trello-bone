@@ -2,6 +2,7 @@ var NewCardModal = Backbone.View.extend({
   attributes: function() {
     return {
       action: '/lists/' + this.model.attributes.id + '/cards/',
+      class: 'new-card-form',
       method: 'post',
     };
   },

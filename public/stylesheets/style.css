@@ -322,6 +322,11 @@ h2 {
 
 /* New Card Modal */
 
+/*.new-card-form ~ .cards-view {*/
+.new-card-form {
+  margin-top: -10px;
+}
+
 .new-card-textarea {
   border-radius: 3px;
   outline: none;
