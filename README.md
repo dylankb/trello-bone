@@ -1,6 +1,6 @@
-### Trello Clone
+### Trello-Bone
 
-A clone of the Trello task-management app using Express, Backbone, Sass, and more. Only implements a subset of Trello's features.
+A clone of the Trello task-management app using Express, Backbone, Sass, and more. Implements CRUD actions on cards and lists as well as drag-n-drop.
 
 #### Installation
 
